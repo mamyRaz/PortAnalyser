@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Edition - ADMIN</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="scanPortProject" />
+<meta name="author" content="rms" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+
+</head>
+
+<body>
+	<div>
+		<nav class="navbar navbar-inverse">
+			<div class="container">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="#"><span>Port Analyser</span></a>
+					</div>
+					<ul class="nav navbar-nav">
+						<li><a th:href="@{/admin}"><span
+								class="glyphicon glyphicon-home"></span></a></li>
+						<li class="active"><a th:href="@{/admin/users}">Utilisateurs</span></a>
+						</li>
+						<li><a th:href="@{/admin/logs}">Historique</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#"> <span
+								class="glyphicon glyphicon-user"> <span
+									th:text="${email}"></span>
+							</span> <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" th:text="${fullname}"> </a></li>
+								<li role="separator" class="divider"></li>
+								<li><a th:href="@{/login?logout}"><span
+										class="glyphicon glyphicon-log-in"></span> Se déconnecter</a></li>
+							</ul></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<div class="container">
+		<h6>
+			<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <strong>DERNIERE
+				CONNEXION: </strong><cite title="last connection"
+				th:text="${LastSessionDate}"></cite>
+		</h6>
+	</div>
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					Edition d'un utilisateur<small><p>Un compte doit
+							absolument appartenir à une personne. Si ce n'est pas le cas, veuillez
+							séléctionner l'option pour une nouvelle personne.</p></small>
+				</h3>
+				<h2><strong>1/2</strong></h2>
+			</div>
+			<div class="panel-body">
+				<ul class="list-group">
+					<a th:href="@{/admin/users/add?choice=1}">
+					<li class="list-group-item">
+					<span class="glyphicon glyphicon-chevron-right"></span>
+					Création d'utilisateur pour une personne existante</li>
+					</a>
+					<a th:href="@{/admin/users/add?choice=2}">
+					<li class="list-group-item">
+					<span class="glyphicon glyphicon-chevron-right"></span>
+					Création d'utilisateur pour une nouvelle personne</li>
+					</a>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

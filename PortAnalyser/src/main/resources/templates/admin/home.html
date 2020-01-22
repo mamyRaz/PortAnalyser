@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Accueil - ADMIN</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="scanPortProject" />
+<meta name="author" content="rms" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+
+</head>
+
+<body>
+	<div>
+		<div class="alertModal container">
+			<div class="modal" id="myModal" tabindex="-1" role="dialog">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Modal title</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p>Modal body text goes here.</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary">Save
+								changes</button>
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<nav class="navbar navbar-inverse">
+			<div class="container">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" th:href="@{/admin}"><span>Port
+								Analyser</span></a>
+					</div>
+					<ul class="nav navbar-nav">
+						<li class="active"><a th:href="@{/admin}"><span
+								class="glyphicon glyphicon-home"></span></a></li>
+						<li><a th:href="@{/admin/users}">Utilisateurs</span></a></li>
+						<li><a th:href="@{/admin/logs}">Historique</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#"> <span
+								class="glyphicon glyphicon-user"> <span
+									th:text="${email}"></span>
+							</span> <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" th:text="${fullname}"> </a></li>
+								<li role="separator" class="divider"></li>
+								<li><a th:href="@{/login?logout}"><span
+										class="glyphicon glyphicon-log-in"></span> Se déconnecter</a></li>
+							</ul></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<div class="container">
+		<h6>
+			<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <strong>DERNIERE
+				CONNEXION: </strong><cite title="last connection"
+				th:text="${LastSessionDate}"></cite>
+		</h6>
+	</div>
+	<div class="container">
+		<h3>Bonjour! vous êtes un administrateur</h3>
+		<p>Vous pouvez gérer vos utilisateurs et visualiser l'historique
+			de connexion ainsi que l'historique des scans</p>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<form class="form-inline" th:action="@{'/admin/scan'}"
+							th:object="${scanModel}" method="post">
+							<div class="form-group">
+								<label class="sr-only" for="ipStart">Adresse IP début</label> <input
+									type="text" th:field="*{ipStart}" class="form-control"
+									id="ipStart" placeholder="Adresse IP début" />
+
+							</div>
+							<div class="form-group">
+								<label>à</label>
+							</div>
+							<div class="form-group">
+								<label class="sr-only" for="ipEnd">Adresse IP fin</label> <input
+									type="text" th:field="*{ipEnd}" class="form-control" id="ipEnd"
+									placeholder="Adresse IP fin" />
+
+							</div>
+
+							<div class="form-group">
+								<label>/</label>
+							</div>
+
+							<div class="form-group">
+								<label class="sr-only" for="portStart">Port début</label> <input
+									type="text" th:field="*{portStart}" class="form-control"
+									id="portStart" placeholder="Port début" />
+
+							</div>
+							<div class="form-group">
+								<label>à</label>
+							</div>
+							<div class="form-group">
+								<label class="sr-only" for="portEnd">Port fin</label> <input
+									type="text" th:field="*{portEnd}" class="form-control"
+									id="portEnd" placeholder="Port fin" />
+
+							</div>
+							<button type="submit" class="btn btn-success">
+								<span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
+								Scanner
+							</button>
+						</form>
+					</div>
+					<div class="panel-body" th:if="${post}">
+						<div class="col-sm-12" th:if="${hasAlert}">
+							<div class="alert alert-danger" role="alert" th:text="${alerts}"></div>
+						</div>
+						
+						<div class="col-sm-9">
+							<table class="table table-condensed">
+								<thead>
+									<tr>
+										<th scope="col">Adresse IP</th>
+										<th scope="col">Port</th>
+										<th scope="col">Date du scan</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="ip : ${scanResult.ips}">
+										<th scope="row" th:text="${ip}"></th>
+										<td scope="col">
+											<ul>
+												<li th:each="serv : ${ip.services}"
+													th:text="${serv.portOpened}? ${serv.port} + ' -> ouvert' : ${serv.port} + ' -> fermé'">
+
+												</li>
+											</ul>
+										</td>
+										<td scope="col" th:text="${scanResult.createdDate}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+						<div class="col-sm-3">
+							<div class="panel panel-default">
+								<div class="panel-heading">
+									<h3 class="panel-title">Infos scan LAN</h3>
+								</div>
+								<div class="panel-body">
+									<ul>
+										<li th:text="${lanInfos.ipFound} + ${' hôte(s) trouvé(s)'}"></li>
+										<li
+											th:text="${'Temps de réponse: '} + ${lanInfos.timeElapse} + ${' secondes'}"></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <script type="text/javascript" th:src="@{/static/vendor/jquery/jquery-3.2.1.min.js}"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$.ajax({
+				type: "POST",
+		           url: "/admin/scan", // the URL of the controller action method
+		           data: null, // optional data
+		           success: function(result) {
+		                $('.alertModal #myModal').modal();
+		           },                
+		           error : function(req, status, error) {
+		        	   
+		           }
+			});
+		});
+	</script>
+ -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Liste - ADMIN</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="scanPortProject" />
+<meta name="author" content="rms" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+
+</head>
+
+<body>
+	<div>
+		<nav class="navbar navbar-inverse">
+			<div class="container">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="#"><span>Port Analyser</span></a>
+					</div>
+					<ul class="nav navbar-nav">
+						<li><a th:href="@{/admin}"><span
+								class="glyphicon glyphicon-home"></span></a></li>
+						<li class="active"><a th:href="@{/admin/users}">Utilisateurs</span></a>
+						</li>
+						<li><a th:href="@{/admin/logs}">Historique</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#"> <span
+								class="glyphicon glyphicon-user"> <span
+									th:text="${email}"></span>
+							</span> <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" th:text="${fullname}"> </a></li>
+								<li role="separator" class="divider"></li>
+								<li><a th:href="@{/login?logout}"><span
+										class="glyphicon glyphicon-log-in"></span> Se déconnecter</a></li>
+							</ul></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<div class="container">
+		<h6>
+			<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+			 <strong>DERNIERE CONNEXION: </strong><cite title="last connection" th:text="${LastSessionDate}"></cite>
+		</h6>
+	</div>
+	<div class="container">
+		<p>
+			<a class="btn btn-success" th:href="@{/admin/users/add}"
+				aria-haspopup="true" aria-expanded="false"> <span
+				class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nouveau
+			</a>
+		</p>
+	</div>
+	<div class="container">
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">Liste des utilisateurs <span class="badge" th:text="${userCount}"></span></h3>
+			</div>
+			<table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">#id</th>
+      <th scope="col">Prénom(s)</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Nom d'utilisateur</th>
+      <th scope="col">Création compte</th>
+      <th scope="col">Rôles</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="user : ${users}">
+      <th scope="row" th:text="${user.id}"></th>
+      <td th:text="${user.person.firstname}"></td>
+      <td th:text="${user.person.lastname}"></td>
+      <td th:text="${user.username}"></td>
+      <td th:text="${user.createdDate}"></td>
+      <td >
+      		<span th:each="role : ${user.roles}" th:text="${role.roleName}"></span>
+      </td>
+      <td>
+      	<a class="btn btn-primary" th:href="@{/admin/users/details(id=${user.id})}"
+				aria-haspopup="true" aria-expanded="false"> <span
+				class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+			</a>
+			<a class="btn btn-primary" th:if="${user.username} != ${email}" th:href="@{'/admin/users/delete/' + ${user.id}}"
+				aria-haspopup="true" aria-expanded="false"> <span
+				class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+			</a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+		</div>
+	</div>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

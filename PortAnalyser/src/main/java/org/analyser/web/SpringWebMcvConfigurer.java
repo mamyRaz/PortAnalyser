@@ -1,0 +1,24 @@
+package org.analyser.web;
+
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@ComponentScan(basePackages = {"org.analyser.web"})
+@Configuration
+@EnableAutoConfiguration
+@EnableWebMvc
+public class SpringWebMcvConfigurer implements WebMvcConfigurer{
+	
+	/**
+		Le dossier src/main/resources/static est déclarée ici comme
+    	un conteneur de ressources pour y mettre par exemple du js et Bootstrap
+	 */
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+	}
+}

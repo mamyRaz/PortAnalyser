@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>S'identifier</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="scanPortProject" />
+    <meta name="author" content="rms" />
+
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" th:href="@{/static/images/icons/favicon.ico}" />
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/static/vendor/bootstrap/css/bootstrap.min.css}" />
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css}" />
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/static/vendor/animate/animate.css}" />
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" th:href="@{/static/vendor/css-hamburgers/hamburgers.min.css}" />
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/static/vendor/select2/select2.min.css}" />
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/util.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/static/css/main.css}" />
+<!--===============================================================================================-->
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img th:src="@{/static/images/cloun.png}" alt="IMG">
+				</div>
+				<!-- th:action="@{/login}" permet d'activer la protection contre la csrf -->
+				<form th:action="@{/login}" method="post" class="login100-form validate-form">
+					<span class="login100-form-title">
+						Connexion
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
+						<input class="input100" type="email" name="username" placeholder="Email" required>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<input class="input100" type="password" name="password" placeholder="Mot de passe" required>
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+					</div>
+					
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn" type="submit">
+							Se connecter
+						</button>
+					</div>
+<!-- 
+					<div class="text-center p-t-12">
+						<a class="txt2" href="#">
+							Nom d'utilisateur / Mot de passe
+						</a>
+						<span class="txt1">
+							oublié?
+						</span>
+					</div>
+
+					<div class="text-center p-t-136">
+						<a class="txt2" href="#">
+							Créer un compte et devenir membre
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
+					</div> -->
+				</form>
+			</div>
+		</div>
+	</div>
+	
+	
+
+	
+<!--===============================================================================================-->
+	<script type="text/javascript" th:src="@{/static/vendor/jquery/jquery-3.2.1.min.js}"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" th:src="@{/static/vendor/bootstrap/js/popper.js}"></script>
+	<script type="text/javascript" th:src="@{/static/vendor/bootstrap/js/bootstrap.min.js}"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" th:src="@{/static/vendor/select2/select2.min.js}"></script>
+<!--===============================================================================================-->
+	<script type="text/javascript" th:src="@{/static/vendor/tilt/tilt.jquery.min.js}"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script type="text/javascript" th:src="@{/static/js/main.js}"></script>
+
+</body>
+</html>

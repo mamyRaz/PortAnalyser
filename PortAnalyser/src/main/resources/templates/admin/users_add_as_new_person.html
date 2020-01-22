@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Ajout - ADMIN</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="scanPortProject" />
+<meta name="author" content="rms" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+
+</head>
+
+<body>
+	<div>
+		<nav class="navbar navbar-inverse">
+			<div class="container">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="#"><span>Port Analyser</span></a>
+					</div>
+					<ul class="nav navbar-nav">
+						<li><a th:href="@{/admin}"><span
+								class="glyphicon glyphicon-home"></span></a></li>
+						<li class="active"><a th:href="@{/admin/users}">Utilisateurs</span></a>
+						</li>
+						<li><a th:href="@{/admin/logs}">Historique</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#"> <span
+								class="glyphicon glyphicon-user"> <span
+									th:text="${email}"></span>
+							</span> <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" th:text="${fullname}"> </a></li>
+								<li role="separator" class="divider"></li>
+								<li><a th:href="@{/login?logout}"><span
+										class="glyphicon glyphicon-log-in"></span> Se déconnecter</a></li>
+							</ul></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<div class="container">
+		<h6>
+			<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <strong>DERNIERE
+				CONNEXION: </strong><cite title="last connection"
+				th:text="${LastSessionDate}"></cite>
+		</h6>
+	</div>
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">
+					Edition d'un utilisateur<small><p>Un compte doit
+							appartenir à une personne.</p></small>
+				</h3>
+				<h2>
+					<strong>2/2</strong>
+				</h2>
+			</div>
+		</div>
+		<form class="form-horizontal" th:action="@{'/admin/users/add?choice=2'}" th:object="${user}" method="post">
+			<input type="hidden" th:field="*{id}" class="form-control" id="id">
+			<div class="form-group">
+				<label for="lastname" class="col-sm-2 control-label">Nom</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{person.lastname}"
+						class="form-control" id="lastname" placeholder="Ex: Cassova">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="firstname" class="col-sm-2 control-label">Prénom(s)</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{person.firstname}"
+						class="form-control" id="firstname" placeholder="Ex: Francis">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="address" class="col-sm-2 control-label">Adresse</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{person.address}"
+						class="form-control" id="address"
+						placeholder="Ex: 23 avenue d'Italie 67 560 Besançon France">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="telephone" class="col-sm-2 control-label">Tel</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{person.telephone}"
+						class="form-control" id="telephone" placeholder="Ex: 0722334455">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="email" class="col-sm-2 control-label">Email</label>
+				<div class="col-sm-10">
+					<input type="email"  th:field="*{person.email}" class="form-control" id="email"
+						placeholder="Ex: franciscassova@email.com">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="person" class="col-sm-2 control-label">Rôle</label>
+				<div class="col-sm-10">
+					<select class="form-control" th:field="*{roles}" id="person">
+						<option th:each="role : ${roles}" th:value="${role.id}"
+							th:text="${role.roleName}"></option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="password" class="col-sm-2 control-label">Mot de
+					passe</label>
+				<div class="col-sm-10">
+					<input type="password" th:field="*{password}" class="form-control"
+						id="password" placeholder="Saisissez votre mot de passe">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="confirmPassword" class="col-sm-2 control-label">Confirmation
+					mot de passe</label>
+				<div class="col-sm-10">
+					<input type="password" class="form-control" id="confirmPassword"
+						placeholder="Confirmer votre mot de passe">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<a class="btn btn-info" th:href="@{/admin/users/add}"><span
+						class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>
+					Précedent</a>
+
+					<button type="submit" class="btn btn-success">
+						<span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>
+						Enregistrer
+					</button>
+
+					<a class="btn btn-default" th:href="@{/admin/users}"><span
+						class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+						Annuler</a>
+				</div>
+			</div>
+		</form>
+	</div>
+	</div>
+
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Accueil - ADMIN</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="scanPortProject" />
+<meta name="author" content="rms" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+
+</head>
+
+<body>
+	<div>
+		<div class="alertModal container">
+			<div class="modal" id="myModal" tabindex="-1" role="dialog">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title">Modal title</h5>
+							<button type="button" class="close" data-dismiss="modal"
+								aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p>Modal body text goes here.</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary">Save
+								changes</button>
+							<button type="button" class="btn btn-secondary"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<nav class="navbar navbar-inverse">
+			<div class="container">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<a class="navbar-brand" th:href="@{/admin}"><span>Port
+								Analyser</span></a>
+					</div>
+					<ul class="nav navbar-nav">
+						<li class="active"><a th:href="@{/admin}"><span
+								class="glyphicon glyphicon-home"></span></a></li>
+						<li><a th:href="@{/admin/users}">Utilisateurs</span></a></li>
+						<li><a th:href="@{/admin/logs}">Historique</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="dropdown"><a class="dropdown-toggle"
+							data-toggle="dropdown" href="#"> <span
+								class="glyphicon glyphicon-user"> <span
+									th:text="${email}"></span>
+							</span> <span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" th:text="${fullname}"> </a></li>
+								<li role="separator" class="divider"></li>
+								<li><a th:href="@{/login?logout}"><span
+										class="glyphicon glyphicon-log-in"></span> Se déconnecter</a></li>
+							</ul></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<div class="container">
+		<h6>
+			<span class="glyphicon glyphicon-time" aria-hidden="true"></span> <strong>DERNIERE
+				CONNEXION: </strong><cite title="last connection"
+				th:text="${LastSessionDate}"></cite>
+		</h6>
+	</div>
+	<div class="container">
+		<div class="alert alert-danger" role="alert">
+  			<p th:text="${message}"></p>
+		</div>
+	</div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</body>
+</html>
