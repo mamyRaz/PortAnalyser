@@ -1,4 +1,4 @@
-package org.analyser.entities;
+package org.analyser.models;
 
 import java.io.Serializable;
 

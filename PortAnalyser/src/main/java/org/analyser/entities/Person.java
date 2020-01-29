@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -19,19 +20,24 @@ public class Person implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;	
+	@NotNull
 	private String lastname;
+	@NotNull
 	private String firstname;
+	@Email
 	@NotNull
 	private String email;
+	@NotNull
 	private String address;
-	@Size(max = 10, message = "Au maximum 10 chiffres")
+	@Size(min= 10, max = 12)
 	private String telephone;
 	
 	public Person() {
 		super();
 	}
 
-	public Person(Long id, String lastname, String firstname, String email, String address, String telephone) {
+	public Person(Long id, @NotNull String lastname, @NotNull String firstname, @NotNull String email,
+			@NotNull String address, @Size(min = 10, max = 12, message = "Au maximum 10 chiffres") String telephone) {
 		super();
 		this.id = id;
 		this.lastname = lastname;
@@ -41,7 +47,8 @@ public class Person implements Serializable{
 		this.telephone = telephone;
 	}
 
-	public Person(String lastname, String firstname, String email, String address, String telephone) {
+	public Person(@NotNull String lastname, @NotNull String firstname, @NotNull String email, @NotNull String address,
+			@Size(min = 10, max = 12, message = "Au maximum 10 chiffres") String telephone) {
 		super();
 		this.lastname = lastname;
 		this.firstname = firstname;

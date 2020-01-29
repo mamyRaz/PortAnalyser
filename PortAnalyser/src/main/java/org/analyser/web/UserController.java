@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import org.analyser.entities.AppUser;
 import org.analyser.entities.IPAddress;
 import org.analyser.entities.Scan;
-import org.analyser.entities.ScanInfoForm;
+import org.analyser.models.ScanInfoForm;
 import org.analyser.entities.SystemService;
 import org.analyser.security.SessionHandler;
 import org.analyser.services.Implementations.HostScannerImpl;

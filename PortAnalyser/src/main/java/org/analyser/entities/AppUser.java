@@ -16,6 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.data.annotation.CreatedDate;
@@ -30,6 +31,7 @@ public class AppUser implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Email
 	@NotNull
 	@Column(unique = true)
 	private String username;
@@ -42,6 +44,7 @@ public class AppUser implements Serializable{
 	private Collection<AppRole> roles = new ArrayList<>(); 
 	@OneToMany(mappedBy = "user")
 	private Collection<SessionInfo> sessionInfos = new ArrayList<>(); 
+	@NotNull
 	@CreatedDate
 	@Column(name = "created_date")
 	private Date createdDate = new Date();
@@ -50,26 +53,8 @@ public class AppUser implements Serializable{
 		super();
 	}
 
-	public AppUser(@NotNull String username, String password, Person person, @NotNull Collection<AppRole> roles) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.person = person;
-		this.roles = roles;
-	}
-
-	public AppUser(Long id, @NotNull String username, String password, Person person,
-			@NotNull Collection<AppRole> roles) {
-		super();
-		this.id = id;
-		this.username = username;
-		this.password = password;
-		this.person = person;
-		this.roles = roles;
-	}
-
-	public AppUser(Long id, @NotNull String username, String password, Person person,
-			@NotNull Collection<AppRole> roles, Collection<SessionInfo> sessionInfos, Date createdDate) {
+	public AppUser(Long id, @Email @NotNull String username, String password, @NotNull Person person,
+			@NotNull Collection<AppRole> roles, Collection<SessionInfo> sessionInfos, @NotNull Date createdDate) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -80,8 +65,8 @@ public class AppUser implements Serializable{
 		this.createdDate = createdDate;
 	}
 
-	public AppUser(@NotNull String username, String password, Person person, @NotNull Collection<AppRole> roles,
-			Collection<SessionInfo> sessionInfos, Date createdDate) {
+	public AppUser(@Email @NotNull String username, String password, @NotNull Person person,
+			@NotNull Collection<AppRole> roles, Collection<SessionInfo> sessionInfos, @NotNull Date createdDate) {
 		super();
 		this.username = username;
 		this.password = password;

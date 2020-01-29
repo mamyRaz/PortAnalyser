@@ -101,7 +101,7 @@ public class LANScannerImpl implements ILANScanner, Serializable {
 			int returnVal = p1.waitFor();
 			reachable = (returnVal == 0);
 		} catch (IOException | InterruptedException ex) {
-			Logger.getLogger(LANScanner.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(LANScannerImpl.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		return reachable;
 	}

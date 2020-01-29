@@ -26,4 +26,5 @@ public interface IAccountService {
 	public List<SessionInfo> findAllSessionInfo(AppUser user);
 	public Date findLastSession(Long id);
 	public List<Person> findAllPersons();
+	public Person findPersonById(Long id);
 }

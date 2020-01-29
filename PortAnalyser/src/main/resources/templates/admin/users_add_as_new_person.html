@@ -60,74 +60,91 @@
 					Edition d'un utilisateur<small><p>Un compte doit
 							appartenir à une personne.</p></small>
 				</h3>
+
 				<h2>
-					<strong>2/2</strong>
+					<strong>Ajout d'un nouvelle utilisateur avec une nouvelle personne</strong>
 				</h2>
 			</div>
 		</div>
-		<form class="form-horizontal" th:action="@{'/admin/users/add?choice=2'}" th:object="${user}" method="post">
+		<form class="form-horizontal" th:action="@{''}" th:object="${userRegistrationForm}" method="post">
 			<input type="hidden" th:field="*{id}" class="form-control" id="id">
-			<div class="form-group">
+			
+			<div th:class="${#fields.hasErrors('lastname')}? has-error: form-group">
 				<label for="lastname" class="col-sm-2 control-label">Nom</label>
 				<div class="col-sm-10">
-					<input type="text" th:field="*{person.lastname}"
+					<input type="text" th:field="*{lastname}"
 						class="form-control" id="lastname" placeholder="Ex: Cassova">
+					<p th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}" th:errorclass="fieldError">Name Error</p>
 				</div>
 			</div>
-			<div class="form-group">
+			
+			<div th:class="${#fields.hasErrors('firstname')}? has-error: form-group">
 				<label for="firstname" class="col-sm-2 control-label">Prénom(s)</label>
 				<div class="col-sm-10">
-					<input type="text" th:field="*{person.firstname}"
+					<input type="text" th:field="*{firstname}"
 						class="form-control" id="firstname" placeholder="Ex: Francis">
+					<p th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}" th:errorclass="fieldError">Name Error</p>
 				</div>
 			</div>
-			<div class="form-group">
+			
+			<div th:class="${#fields.hasErrors('address')}? has-error: form-group">
 				<label for="address" class="col-sm-2 control-label">Adresse</label>
 				<div class="col-sm-10">
-					<input type="text" th:field="*{person.address}"
+					<input type="text" th:field="*{address}"
 						class="form-control" id="address"
 						placeholder="Ex: 23 avenue d'Italie 67 560 Besançon France">
+					<p th:if="${#fields.hasErrors('address')}" th:errors="*{address}" th:errorclass="fieldError">Name Error</p>
 				</div>
 			</div>
-			<div class="form-group">
+			
+			<div th:class="${#fields.hasErrors('telephone')}? has-error: form-group">
 				<label for="telephone" class="col-sm-2 control-label">Tel</label>
 				<div class="col-sm-10">
-					<input type="text" th:field="*{person.telephone}"
+					<input type="text" th:field="*{telephone}"
 						class="form-control" id="telephone" placeholder="Ex: 0722334455">
+					<p th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}" th:errorclass="fieldError">Name Error</p>
 				</div>
 			</div>
-			<div class="form-group">
+			
+			<div th:class="${#fields.hasErrors('email')}? has-error: form-group">
 				<label for="email" class="col-sm-2 control-label">Email</label>
 				<div class="col-sm-10">
-					<input type="email"  th:field="*{person.email}" class="form-control" id="email"
+					<input type="email"  th:field="*{email}" class="form-control" id="email"
 						placeholder="Ex: franciscassova@email.com">
+					<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" th:errorclass="fieldError">Name Error</p>
 				</div>
 			</div>
-			<div class="form-group">
+			
+			<div th:class="${#fields.hasErrors('roles')}? has-error: form-group">
 				<label for="person" class="col-sm-2 control-label">Rôle</label>
 				<div class="col-sm-10">
 					<select class="form-control" th:field="*{roles}" id="person">
 						<option th:each="role : ${roles}" th:value="${role.id}"
 							th:text="${role.roleName}"></option>
 					</select>
+					<p th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}" th:errorclass="fieldError">Name Error</p>
 				</div>
 			</div>
-			<div class="form-group">
+			
+			<div th:class="${#fields.hasErrors('password')}? has-error: form-group">
 				<label for="password" class="col-sm-2 control-label">Mot de
 					passe</label>
 				<div class="col-sm-10">
 					<input type="password" th:field="*{password}" class="form-control"
 						id="password" placeholder="Saisissez votre mot de passe">
+					<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" th:errorclass="fieldError">Name Error</p>
 				</div>
 			</div>
-			<div class="form-group">
-				<label for="confirmPassword" class="col-sm-2 control-label">Confirmation
-					mot de passe</label>
+			
+			<div th:class="${#fields.hasErrors('confirmPassword')}? has-error: form-group">
+				<label for="confirmPassword" class="col-sm-2 control-label">Confirmer mot de passe</label>
 				<div class="col-sm-10">
-					<input type="password" class="form-control" id="confirmPassword"
-						placeholder="Confirmer votre mot de passe">
+					<input type="password" th:field="*{confirmPassword}" class="form-control"
+						id="confirmPassword" placeholder="Resaisissez votre mot de passe">
+					<p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}" th:errorclass="fieldError">Name Error</p>
 				</div>
 			</div>
+			
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<a class="btn btn-info" th:href="@{/admin/users/add}"><span
@@ -145,7 +162,6 @@
 				</div>
 			</div>
 		</form>
-	</div>
 	</div>
 
 	<script

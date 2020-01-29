@@ -126,4 +126,9 @@ public class AccountServiceImpl implements IAccountService{
 	public void deleteUser(Long id) {
 		appUserRepository.deleteById(id);
 	}
+
+	@Override
+	public Person findPersonById(Long id) {
+		return personRepository.findPersonById(id);
+	}
 }

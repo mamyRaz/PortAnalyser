@@ -14,7 +14,6 @@ import org.analyser.entities.Person;
 import org.analyser.entities.SystemServiceBenchmark;
 import org.analyser.security.SecurityConstants;
 import org.analyser.services.Implementations.HostScannerImpl;
-import org.analyser.services.Implementations.LANScanner;
 import org.analyser.services.Implementations.LANScannerImpl;
 import org.analyser.services.interfaces.IAccountService;
 import org.analyser.services.interfaces.IScannerService;
