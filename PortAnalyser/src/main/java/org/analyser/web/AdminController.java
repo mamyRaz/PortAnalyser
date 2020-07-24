@@ -57,7 +57,8 @@ public class AdminController {
     private IScannerService scannerService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String home(HttpServletRequest request, @RequestParam(required = false) Long id, HttpSession session, Model model) throws IOException {
+    public String home(@RequestParam(required = false) Long id, HttpSession session, Model model) throws IOException {
+    //public String home(HttpServletRequest request, @RequestParam(required = false) Long id, HttpSession session, Model model) throws IOException {
         /**
          * Si l'utilisateur tape /admin dans ce cas, on n'a pas besoin de "id"
          * s'il est deja authentifié Mais normalement il doit avoir une session
@@ -76,6 +77,7 @@ public class AdminController {
         if (SessionHandler.getUser(session) == null) {
             return "redirect:/login";
         }
+        /*
         String userAgent = request.getHeader("User-Agent");
         Parser uaParser = new Parser();
         Client c = uaParser.parse(userAgent);
@@ -112,6 +114,7 @@ public class AdminController {
         }
         System.out.println(request.getRemoteAddr());
         model.addAttribute("systeme", systeme);
+        */
 
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date date = accountService.findLastSession(SessionHandler.getUser(session).getId());

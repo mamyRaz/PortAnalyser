@@ -90,7 +90,7 @@ public class LANScannerImpl implements ILANScanner, Serializable {
 	/**
 	 * Ping sur une adresse ip
 	 *
-	 * @param Ipv4Adr ip adresse ip du poste
+	 * @param IPV4Address ip adresse ip du poste
 	 * @return boolean
 	 */
 	private boolean isAlive(String IPV4Address) {
